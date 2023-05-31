@@ -1,0 +1,288 @@
+{
+	"id": "3355a5b9-9e8c-40c4-be5f-6c2f0c44daef",
+	"name": "Cloud Charge Api Testing Copy",
+	"timestamp": "2023-05-31T22:54:53.654Z",
+	"collection_id": "0-2c65572c-76ca-432f-b882-c8f240a86db4",
+	"folder_id": 0,
+	"environment_id": "82121276-113a-40e9-86ad-0522a7f6b253",
+	"totalPass": 20,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "ba2a29c6-2a77-43f9-b481-b9e60660fdab",
+			"name": "1. Reset Request",
+			"url": "https://qgcxxd2wlj.execute-api.us-east-1.amazonaws.com/prod/reset-redis",
+			"time": 458,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Reset balance to 100 initially": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Reset balance to 100 initially": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				458
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Reset balance to 100 initially": true
+				}
+			]
+		},
+		{
+			"id": "9a481188-a187-463e-86cf-a60a577d9a09",
+			"name": "2. Charge Request 1 unit of Voice",
+			"url": "https://qgcxxd2wlj.execute-api.us-east-1.amazonaws.com/prod/charge-request-redis",
+			"time": 296,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Should be Authorized": true,
+				"Should be charged 5": true,
+				"Should have remaining balance of 95": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should be Authorized": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should be charged 5": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should have remaining balance of 95": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				296
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Should be Authorized": true,
+					"Should be charged 5": true,
+					"Should have remaining balance of 95": true
+				}
+			]
+		},
+		{
+			"id": "c956252f-075b-4a99-97ff-b16bea699d06",
+			"name": "3. Charge Request remaining 19 units of Voice",
+			"url": "https://qgcxxd2wlj.execute-api.us-east-1.amazonaws.com/prod/charge-request-redis",
+			"time": 291,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Should be Authorized": true,
+				"Should be charged 95": true,
+				"Should have remaining balance of 0": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should be Authorized": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should be charged 95": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should have remaining balance of 0": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				291
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Should be Authorized": true,
+					"Should be charged 95": true,
+					"Should have remaining balance of 0": true
+				}
+			]
+		},
+		{
+			"id": "ce8b1afc-b428-4242-86c3-fb42903e2f58",
+			"name": "4. Charge Request without balance",
+			"url": "https://qgcxxd2wlj.execute-api.us-east-1.amazonaws.com/prod/charge-request-redis",
+			"time": 122,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Should not be Authorized": true,
+				"Should not be charged": true,
+				"Should have remaining balance of 0": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should not be Authorized": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should not be charged": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should have remaining balance of 0": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				122
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Should not be Authorized": true,
+					"Should not be charged": true,
+					"Should have remaining balance of 0": true
+				}
+			]
+		},
+		{
+			"id": "1eb2a97f-c9de-443c-b5e3-4855bfccd6c5",
+			"name": "5. Reset Again",
+			"url": "https://qgcxxd2wlj.execute-api.us-east-1.amazonaws.com/prod/reset-redis",
+			"time": 520,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Reset balance to 100 initially": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Reset balance to 100 initially": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				520
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Reset balance to 100 initially": true
+				}
+			]
+		},
+		{
+			"id": "e828d71f-7a67-444d-9178-6b144d04eff0",
+			"name": "6. Charge Request 1 unit of Message",
+			"url": "https://qgcxxd2wlj.execute-api.us-east-1.amazonaws.com/prod/charge-request-redis",
+			"time": 372,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Should be Authorized": true,
+				"Should be charged 1": true,
+				"Should have remaining balance of 99": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should be Authorized": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should be charged 1": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Should have remaining balance of 99": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				372
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Should be Authorized": true,
+					"Should be charged 1": true,
+					"Should have remaining balance of 99": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 2059,
+	"collection": {
+		"requests": [
+			{
+				"id": "ba2a29c6-2a77-43f9-b481-b9e60660fdab",
+				"method": "POST"
+			},
+			{
+				"id": "9a481188-a187-463e-86cf-a60a577d9a09",
+				"method": "POST"
+			},
+			{
+				"id": "c956252f-075b-4a99-97ff-b16bea699d06",
+				"method": "POST"
+			},
+			{
+				"id": "ce8b1afc-b428-4242-86c3-fb42903e2f58",
+				"method": "POST"
+			},
+			{
+				"id": "1eb2a97f-c9de-443c-b5e3-4855bfccd6c5",
+				"method": "POST"
+			},
+			{
+				"id": "e828d71f-7a67-444d-9178-6b144d04eff0",
+				"method": "POST"
+			}
+		]
+	}
+}

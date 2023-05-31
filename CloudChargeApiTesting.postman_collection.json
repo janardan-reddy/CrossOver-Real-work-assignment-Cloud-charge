@@ -1,0 +1,799 @@
+{
+	"info": {
+		"_postman_id": "a00c7f00-72ad-4adb-aa2d-7280c4b79812",
+		"name": "Cloud Charge Api Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Reset Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Reset balance to 100 initially\", function () {",
+							"    pm.response.to.have.body(\"100\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://qgcxxd2wlj.execute-api.us-east-1.amazonaws.com/prod/reset-redis",
+					"protocol": "https",
+					"host": [
+						"qgcxxd2wlj",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"reset-redis"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "1. Reset Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://qgcxxd2wlj.execute-api.us-east-1.amazonaws.com/prod/reset-redis",
+							"protocol": "https",
+							"host": [
+								"qgcxxd2wlj",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"prod",
+								"reset-redis"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 31 May 2023 22:45:52 GMT"
+						},
+						{
+							"key": "x-amzn-RequestId",
+							"value": "03ab7caf-bf49-41be-88df-529c31cd2544"
+						},
+						{
+							"key": "x-amz-apigw-id",
+							"value": "Fz0lCEkPoAMFf8g="
+						},
+						{
+							"key": "X-Amzn-Trace-Id",
+							"value": "Root=1-6477ce1f-4e64558f192c75a41470e15c;Sampled=0"
+						},
+						{
+							"key": "X-Cache",
+							"value": "Miss from cloudfront"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 1bc76a14967a660022b25f573baec632.cloudfront.net (CloudFront)"
+						},
+						{
+							"key": "X-Amz-Cf-Pop",
+							"value": "AMS54-C1"
+						},
+						{
+							"key": "X-Amz-Cf-Id",
+							"value": "5BRwHiS7NejwtTilJJVk_rDhqq86RM0zSSPO-b22i5SLhPimV37MXQ=="
+						}
+					],
+					"cookie": [],
+					"body": "100"
+				}
+			]
+		},
+		{
+			"name": "2. Charge Request 1 unit of Voice",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Should be Authorized\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.isAuthorized).to.eql(true);",
+							"});",
+							"pm.test(\"Should be charged 5\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.charges).to.eql(5);",
+							"});",
+							"",
+							"pm.test(\"Should have remaining balance of 95\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.remainingBalance).to.eql(95);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"serviceType\": \"voice\",\n    \"unit\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qgcxxd2wlj.execute-api.us-east-1.amazonaws.com/prod/charge-request-redis",
+					"protocol": "https",
+					"host": [
+						"qgcxxd2wlj",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"charge-request-redis"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "2. Charge Request 1",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"serviceType\": \"voice\",\n    \"unit\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qgcxxd2wlj.execute-api.us-east-1.amazonaws.com/prod/charge-request-redis",
+							"protocol": "https",
+							"host": [
+								"qgcxxd2wlj",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"prod",
+								"charge-request-redis"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "55"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 31 May 2023 22:49:50 GMT"
+						},
+						{
+							"key": "x-amzn-RequestId",
+							"value": "3459c7e2-e38d-42f5-99ad-97cc8483dc8c"
+						},
+						{
+							"key": "x-amz-apigw-id",
+							"value": "Fz1KNG9FIAMF1Xg="
+						},
+						{
+							"key": "X-Amzn-Trace-Id",
+							"value": "Root=1-6477cf0d-4c7a53371bc450d167b91e8d;Sampled=0"
+						},
+						{
+							"key": "X-Cache",
+							"value": "Miss from cloudfront"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 1bc76a14967a660022b25f573baec632.cloudfront.net (CloudFront)"
+						},
+						{
+							"key": "X-Amz-Cf-Pop",
+							"value": "AMS54-C1"
+						},
+						{
+							"key": "X-Amz-Cf-Id",
+							"value": "7gWvfBq8lV65xfgyYvD80yJfExU9CqLS0DmWTTl5UYXXbZfcuQJvkw=="
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"remainingBalance\": 95,\n    \"charges\": 5,\n    \"isAuthorized\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "3. Charge Request remaining 19 units of Voice",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Should be Authorized\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.isAuthorized).to.eql(true);",
+							"});",
+							"pm.test(\"Should be charged 95\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.charges).to.eql(95);",
+							"});",
+							"",
+							"pm.test(\"Should have remaining balance of 0\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.remainingBalance).to.eql(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"serviceType\": \"voice\",\n    \"unit\": 19\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qgcxxd2wlj.execute-api.us-east-1.amazonaws.com/prod/charge-request-redis",
+					"protocol": "https",
+					"host": [
+						"qgcxxd2wlj",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"charge-request-redis"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "2. Charge Request remaining 19 units",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"serviceType\": \"voice\",\n    \"unit\": 19\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qgcxxd2wlj.execute-api.us-east-1.amazonaws.com/prod/charge-request-redis",
+							"protocol": "https",
+							"host": [
+								"qgcxxd2wlj",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"prod",
+								"charge-request-redis"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "55"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 31 May 2023 22:50:37 GMT"
+						},
+						{
+							"key": "x-amzn-RequestId",
+							"value": "feb7f6b5-d22d-4721-a0dc-a08afe8a8dee"
+						},
+						{
+							"key": "x-amz-apigw-id",
+							"value": "Fz1RdFWcIAMF5YQ="
+						},
+						{
+							"key": "X-Amzn-Trace-Id",
+							"value": "Root=1-6477cf3c-4516ea964deaee916c6c27a3;Sampled=0"
+						},
+						{
+							"key": "X-Cache",
+							"value": "Miss from cloudfront"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 1bc76a14967a660022b25f573baec632.cloudfront.net (CloudFront)"
+						},
+						{
+							"key": "X-Amz-Cf-Pop",
+							"value": "AMS54-C1"
+						},
+						{
+							"key": "X-Amz-Cf-Id",
+							"value": "1saSKWgo0BEVaMq-0tbadeI96vX0a-Z821rB08Vak7C8cLTRJ38BRw=="
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"remainingBalance\": 0,\n    \"charges\": 95,\n    \"isAuthorized\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "4. Charge Request without balance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Should not be Authorized\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.isAuthorized).to.eql(false);",
+							"});",
+							"pm.test(\"Should not be charged\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.charges).to.eql(0);",
+							"});",
+							"",
+							"pm.test(\"Should have remaining balance of 0\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.remainingBalance).to.eql(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"serviceType\": \"voice\",\n    \"unit\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qgcxxd2wlj.execute-api.us-east-1.amazonaws.com/prod/charge-request-redis",
+					"protocol": "https",
+					"host": [
+						"qgcxxd2wlj",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"charge-request-redis"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "4. Charge Request without balance",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"serviceType\": \"voice\",\n    \"unit\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qgcxxd2wlj.execute-api.us-east-1.amazonaws.com/prod/charge-request-redis",
+							"protocol": "https",
+							"host": [
+								"qgcxxd2wlj",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"prod",
+								"charge-request-redis"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "55"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 31 May 2023 22:50:44 GMT"
+						},
+						{
+							"key": "x-amzn-RequestId",
+							"value": "0fbb74eb-da18-45fb-95cc-bad9a075afbb"
+						},
+						{
+							"key": "x-amz-apigw-id",
+							"value": "Fz1SrHfwIAMFSwA="
+						},
+						{
+							"key": "X-Amzn-Trace-Id",
+							"value": "Root=1-6477cf44-6cc5c32875923a972ad8dc38;Sampled=0"
+						},
+						{
+							"key": "X-Cache",
+							"value": "Miss from cloudfront"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 1bc76a14967a660022b25f573baec632.cloudfront.net (CloudFront)"
+						},
+						{
+							"key": "X-Amz-Cf-Pop",
+							"value": "AMS54-C1"
+						},
+						{
+							"key": "X-Amz-Cf-Id",
+							"value": "E_ANSTRVejf8iJtWAN5egpeGNja05kj2FvwzPdyWErKwsK-NdI6L7Q=="
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"remainingBalance\": 0,\n    \"isAuthorized\": false,\n    \"charges\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "5. Reset Again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Reset balance to 100 initially\", function () {",
+							"    pm.response.to.have.body(\"100\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://qgcxxd2wlj.execute-api.us-east-1.amazonaws.com/prod/reset-redis",
+					"protocol": "https",
+					"host": [
+						"qgcxxd2wlj",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"reset-redis"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "5. Reset Again",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://qgcxxd2wlj.execute-api.us-east-1.amazonaws.com/prod/reset-redis",
+							"protocol": "https",
+							"host": [
+								"qgcxxd2wlj",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"prod",
+								"reset-redis"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "3"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 31 May 2023 22:50:53 GMT"
+						},
+						{
+							"key": "x-amzn-RequestId",
+							"value": "5d7e6708-e7dd-4618-9854-0185ef85b3a8"
+						},
+						{
+							"key": "x-amz-apigw-id",
+							"value": "Fz1UAEPAIAMFyvA="
+						},
+						{
+							"key": "X-Amzn-Trace-Id",
+							"value": "Root=1-6477cf4c-5f5e982a1c53baf249e9e745;Sampled=0"
+						},
+						{
+							"key": "X-Cache",
+							"value": "Miss from cloudfront"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 1bc76a14967a660022b25f573baec632.cloudfront.net (CloudFront)"
+						},
+						{
+							"key": "X-Amz-Cf-Pop",
+							"value": "AMS54-C1"
+						},
+						{
+							"key": "X-Amz-Cf-Id",
+							"value": "Dx4vn_kiuAbrJ3mmZEzqAKS0AtXzXRWZIGSfzfpNwxYvk9Bx-qGKPA=="
+						}
+					],
+					"cookie": [],
+					"body": "100"
+				}
+			]
+		},
+		{
+			"name": "6. Charge Request 1 unit of Message",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Should be Authorized\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.isAuthorized).to.eql(true);",
+							"});",
+							"pm.test(\"Should be charged 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.charges).to.eql(1);",
+							"});",
+							"",
+							"pm.test(\"Should have remaining balance of 99\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.remainingBalance).to.eql(99);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"serviceType\": \"sms\",\n    \"unit\": 1\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qgcxxd2wlj.execute-api.us-east-1.amazonaws.com/prod/charge-request-redis",
+					"protocol": "https",
+					"host": [
+						"qgcxxd2wlj",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"charge-request-redis"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "6. Charge Request 1 unit of Message",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"serviceType\": \"sms\",\n    \"unit\": 1\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://qgcxxd2wlj.execute-api.us-east-1.amazonaws.com/prod/charge-request-redis",
+							"protocol": "https",
+							"host": [
+								"qgcxxd2wlj",
+								"execute-api",
+								"us-east-1",
+								"amazonaws",
+								"com"
+							],
+							"path": [
+								"prod",
+								"charge-request-redis"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "55"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 31 May 2023 22:50:57 GMT"
+						},
+						{
+							"key": "x-amzn-RequestId",
+							"value": "7a97f31a-f4ba-4bad-a59e-33900795f110"
+						},
+						{
+							"key": "x-amz-apigw-id",
+							"value": "Fz1UwE1fIAMFWsg="
+						},
+						{
+							"key": "X-Amzn-Trace-Id",
+							"value": "Root=1-6477cf51-0497063957012f177a1eaf5c;Sampled=0"
+						},
+						{
+							"key": "X-Cache",
+							"value": "Miss from cloudfront"
+						},
+						{
+							"key": "Via",
+							"value": "1.1 1bc76a14967a660022b25f573baec632.cloudfront.net (CloudFront)"
+						},
+						{
+							"key": "X-Amz-Cf-Pop",
+							"value": "AMS54-C1"
+						},
+						{
+							"key": "X-Amz-Cf-Id",
+							"value": "tA2FCBPkIG9cpVyGOejBBs7rsUCoKB_ZzqVSaEau36wco3fIGQq8xg=="
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"remainingBalance\": 99,\n    \"charges\": 1,\n    \"isAuthorized\": true\n}"
+				}
+			]
+		}
+	]
+}
